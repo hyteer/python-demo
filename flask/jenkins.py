@@ -1,4 +1,6 @@
 from flask import Flask
+from flask import render_template
+from flask import request
 
 app = Flask(__name__)
 
@@ -23,4 +25,18 @@ def projects():
 @app.route('/about')
 def about():
     return 'The about page'
+
+########### Test ###########
+@app.route('/test/<name>',methods=['POST', 'GET'])
+def test(name):
+    #import pdb;pdb.set_trace()
+    if request.method == 'GET':
+        print('method is get.')
+        return render_template('test.html', name=name)
+    else:
+        print('method is post.')
+        name = request.form['name']
+        print('Name:',name)
+        return 'data...'
+
 
